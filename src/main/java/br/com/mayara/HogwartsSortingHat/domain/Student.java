@@ -1,18 +1,25 @@
 package br.com.mayara.HogwartsSortingHat.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
+@NoArgsConstructor
+@Entity
 public class Student {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String name;
-    private ZonedDateTime birth;
-    private House house;
+    private LocalDateTime birth;
+    @Enumerated(EnumType.STRING)
+    private Pets pet;
+    //private House house;
+
 }
