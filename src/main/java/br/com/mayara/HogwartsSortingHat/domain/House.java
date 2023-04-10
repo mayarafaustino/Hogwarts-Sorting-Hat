@@ -1,18 +1,14 @@
 package br.com.mayara.HogwartsSortingHat.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
+import org.springframework.context.annotation.Scope;
 
 import java.util.List;
 
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -22,8 +18,12 @@ public class House {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String name;
-    //private List<Student> students;
+    @OneToMany(mappedBy = "house")
+    private List<Student> students;
+    @OneToOne
+    private Traits traitsPriorities;
+    @ManyToOne
+    private School school;
     //private List<Professor> professors;
     //private Professor head;
-    //private Traits traitsPriorities;
 }

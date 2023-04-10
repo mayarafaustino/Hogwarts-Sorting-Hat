@@ -1,7 +1,9 @@
 package br.com.mayara.HogwartsSortingHat.controller;
 
 import br.com.mayara.HogwartsSortingHat.domain.Student;
+import br.com.mayara.HogwartsSortingHat.domain.Traits;
 import br.com.mayara.HogwartsSortingHat.dto.StudentSaveDTO;
+import br.com.mayara.HogwartsSortingHat.dto.StudentTraitsDTO;
 import br.com.mayara.HogwartsSortingHat.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -29,11 +31,19 @@ public class StudentController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Student save(@RequestBody StudentSaveDTO studentDTO) {
+        StudentTraitsDTO traitsDTO = new StudentTraitsDTO();
+        Traits traits = Traits.builder()
+                .courage(traitsDTO.getCourage())
+                .wisdom(traitsDTO.getWisdom())
+                .ambition(traitsDTO.getAmbition())
+                .justice(traitsDTO.getJustice())
+                .build();
         Student student = Student.builder()
                 .name(studentDTO.getName())
                 .birth(studentDTO.getBirth())
                 .pet(studentDTO.getPet())
                 .build();
+        student.setTraits(traits);
         return service.save(student);
     }
 

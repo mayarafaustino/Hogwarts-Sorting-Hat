@@ -20,6 +20,9 @@ public class Student {
     private LocalDateTime birth;
     @Enumerated(EnumType.STRING)
     private Pets pet;
-    //private House house;
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.MERGE})
+    private Traits traits;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private House house;
 
 }
