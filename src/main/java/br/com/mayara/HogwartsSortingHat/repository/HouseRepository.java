@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface HouseRepository extends CrudRepository<House, Long> {
+
+    House findHouseByName(String name);
 }
